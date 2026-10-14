@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7fb">
+  <meta name="description" content="Router Hub · 轻量、私密的多地点路由器管理入口。">
+  <meta name="referrer" content="no-referrer">
+  <title>Router Hub · 我的网络设备</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell" id="appShell">
+    <aside class="sidebar" id="sidebar" aria-label="主导航">
+      <div class="brand">
+        <div class="brand-symbol" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none"><rect x="1" y="1" width="38" height="38" rx="12" fill="currentColor" opacity=".10"/><path d="M12 26V14m16 12V14M12 20h16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="12" cy="14" r="3" fill="currentColor"/><circle cx="28" cy="26" r="3" fill="currentColor"/></svg>
+        </div>
+        <div><div class="brand-name">Router Hub</div><div class="brand-caption">PERSONAL NETWORK</div></div>
+      </div>
+      <div class="sidebar-section-label">工作空间</div>
+      <nav class="nav-group" aria-label="设备分类">
+        <button class="nav-link active" type="button" data-filter="all" id="navAll">
+          <span class="nav-icon" data-icon="grid"></span><span>全部设备</span><span class="nav-count" id="countAll">0</span>
+        </button>
+        <button class="nav-link" type="button" data-filter="favorites" id="navFavorites">
+          <span class="nav-icon" data-icon="star"></span><span>我的收藏</span><span class="nav-count" id="countFavorites">0</span>
+        </button>
+      </nav>
+      <div class="sidebar-heading"><span class="sidebar-section-label">所在地区</span><span class="tiny-text">LOCATIONS</span></div>
+      <nav class="nav-group" aria-label="地区筛选" id="locationNav"></nav>
+      <div class="sidebar-bottom">
+        <div class="privacy-hint"><span class="privacy-icon" data-icon="lock"></span><div><strong>本地保存</strong><small>设备地址只保存在当前浏览器</small></div></div>
+        <p class="sidebar-footnote">Router Hub · Static Edition</p>
+      </div>
+    </aside>
+
+    <div class="sidebar-scrim" id="sidebarScrim" hidden></div>
+
+    <main class="main-content" id="mainContent">
+      <header class="topbar">
+        <div class="topbar-left"><button class="icon-button mobile-menu" id="menuButton" type="button" aria-label="打开导航菜单"><span data-icon="menu"></span></button><span class="breadcrumb-muted">工作空间</span><span class="breadcrumb-slash">/</span><strong>设备管理</strong></div>
+        <div class="topbar-actions"><span class="local-pill"><span data-icon="shield"></span> 仅保存在本地</span><button class="icon-button" type="button" id="themeButton" title="切换深色模式" aria-label="切换主题"><span data-icon="moon"></span></button></div>
+      </header>
+
+      <div class="page-body">
+        <section class="hero" aria-label="概览">
+          <div class="hero-copy"><div class="eyebrow"><span class="eyebrow-dot"></span> YOUR NETWORK, SIMPLIFIED</div><h1>你的网络，<span>一目了然。</span></h1><p>一个入口，轻松访问分布在不同地点的路由器。</p><div class="hero-cta"><button class="button button-primary" id="heroAdd" type="button"><span data-icon="plus"></span> 添加路由器</button><button class="button button-quiet" id="heroImport" type="button"><span data-icon="import"></span> 导入配置</button></div></div>
+          <div class="hero-art" aria-hidden="true"><div class="art-grid"></div><div class="art-device art-device-1"><span class="art-glyph" data-icon="router"></span><span class="art-led"></span></div><div class="art-device art-device-2"><span class="art-glyph" data-icon="wifi"></span><span class="art-led"></span></div><div class="art-device art-device-3"><span class="art-glyph" data-icon="network"></span><span class="art-led"></span></div><span class="art-line art-line-a"></span><span class="art-line art-line-b"></span><div class="art-hub"><span data-icon="grid"></span></div></div>
+        </section>
+
+        <section class="stats" aria-label="设备统计">
+          <div class="stat"><span class="stat-icon stat-icon-blue" data-icon="router"></span><div><strong id="statDevices">0</strong><span>路由器总数</span></div></div>
+          <div class="stat"><span class="stat-icon stat-icon-violet" data-icon="map-pin"></span><div><strong id="statLocations">0</strong><span>覆盖地区</span></div></div>
+          <div class="stat"><span class="stat-icon stat-icon-amber" data-icon="star"></span><div><strong id="statFavorites">0</strong><span>收藏设备</span></div></div>
+        </section>
+
+        <section class="inventory" aria-labelledby="inventoryTitle">
+          <div class="section-heading"><div><div class="section-overline">DEVICES</div><h2 id="inventoryTitle">全部路由器 <span class="section-total" id="viewCount">0</span></h2><p>选择设备，打开对应管理后台</p></div><div class="heading-actions"><button class="button button-outline" id="exportButton" type="button"><span data-icon="export"></span><span>导出备份</span></button><button class="button button-outline" id="addButton" type="button"><span data-icon="plus"></span><span>添加设备</span></button></div></div>
+          <div class="toolbar"><div class="search"><span data-icon="search"></span><input type="search" id="searchInput" autocomplete="off" placeholder="搜索设备名称、地区、固件、地址…" aria-label="搜索路由器"><span class="shortcut">/</span></div><div class="select-wrap"><span data-icon="filter"></span><select id="typeFilter" aria-label="按固件类型筛选"><option value="all">全部固件</option></select><span data-icon="chevron-down"></span></div><button class="icon-button more-button" id="moreButton" type="button" aria-label="导入或导出配置" title="导入或导出配置"><span data-icon="ellipsis"></span></button></div>
+          <div class="device-grid" id="deviceGrid" aria-live="polite"></div>
+          <div class="empty" id="emptyState" hidden><div class="empty-illustration"><span data-icon="router"></span></div><h3 id="emptyTitle">这里还没有路由器</h3><p id="emptyDescription">添加第一台设备，或导入已有的设备清单。</p><div class="empty-actions"><button class="button button-primary" id="emptyAdd" type="button"><span data-icon="plus"></span> 添加设备</button><button class="button button-outline" id="emptyImport" type="button"><span data-icon="import"></span> 导入配置</button></div></div>
+        </section>
+        <footer class="footer"><span>Made for your network · Router Hub</span><span>纯静态网页 · 不向服务器上传设备数据</span></footer>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="deviceDialog" class="modal" aria-labelledby="modalTitle">
+    <form id="deviceForm" novalidate>
+      <div class="modal-head"><div><div class="modal-overline">DEVICE SETTINGS</div><h2 id="modalTitle">添加路由器</h2><p>保存后设备会出现在当前浏览器中。</p></div><button class="icon-button" id="closeDialog" type="button" aria-label="关闭"><span data-icon="x"></span></button></div>
+      <div class="modal-body">
+        <label class="field"><span>设备名称 <em>*</em></span><input name="name" id="deviceName" maxlength="60" required placeholder="例如：杭州宿舍"></label>
+        <div class="form-row"><label class="field"><span>所在地区 <em>*</em></span><input name="location" maxlength="36" required placeholder="例如：杭州" list="locationSuggestions"></label><label class="field"><span>固件 / 品牌 <em>*</em></span><select name="type" id="deviceType" required><option>OpenWrt</option><option>Padavan</option><option>TP-Link</option><option>华硕</option><option>小米</option><option>其他</option></select></label></div>
+        <label class="field"><span>管理后台地址 <span class="optional">选填</span></span><input name="url" id="deviceUrl" type="text" inputmode="url" maxlength="2048" placeholder="http://192.168.1.1 或 https://router.example.com"><small>必须为 http:// 或 https:// 开头；留空则标记为待配置。</small></label>
+        <label class="field"><span>备注 <span class="optional">选填</span></span><textarea name="note" rows="3" maxlength="220" placeholder="例如：宿舍 · 老毛子"></textarea></label>
+        <datalist id="locationSuggestions"></datalist>
+        <p class="form-error" id="formError" role="alert" hidden></p>
+      </div>
+      <div class="modal-actions"><button class="button button-outline" type="button" id="cancelDialog">取消</button><button class="button button-primary" type="submit"><span data-icon="check"></span> 保存设备</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="settingsDialog" class="modal small-modal" aria-labelledby="settingsTitle"><div class="modal-head"><div><div class="modal-overline">DATA MANAGEMENT</div><h2 id="settingsTitle">配置与备份</h2><p>不使用云端数据库，设备清单由你掌控。</p></div><button class="icon-button" type="button" id="closeSettings" aria-label="关闭"><span data-icon="x"></span></button></div><div class="settings-options"><button class="setting-option" id="settingsImport" type="button"><span class="setting-icon" data-icon="import"></span><span><strong>从 JSON 导入设备</strong><small>与当前设备合并，同名同地址记录会更新</small></span><span data-icon="chevron-right"></span></button><button class="setting-option" id="settingsExport" type="button"><span class="setting-icon" data-icon="export"></span><span><strong>导出当前设备清单</strong><small>下载 JSON 文件，用于备份或换设备导入</small></span><span data-icon="chevron-right"></span></button></div><p class="settings-footnote">提示：换浏览器、换手机不会自动同步。请使用导出 / 导入迁移配置。</p></dialog>
+  <input id="importFile" type="file" accept=".json,application/json" hidden>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

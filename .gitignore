@@ -1,0 +1,9 @@
+# Never commit real router addresses or private backups
+my-routers.json
+my-routers*.json
+*.private.json
+*.private.*
+router-hub-private-import.json
+router-hub-backup-*.json
+.DS_Store
+node_modules/
