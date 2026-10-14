@@ -189,7 +189,7 @@
     setText('statLocations', uniqueLocations().length);
     setText('statFavorites', state.routers.filter(r=>r.favorite).length);
     setText('viewCount', devices.length);
-    setText('inventoryTitle', state.scope === 'all' ? '全部路由器' : state.scope === 'favorites' ? '我的收藏' : state.scope);
+    setText('inventoryName', state.scope === 'all' ? '全部路由器' : state.scope === 'favorites' ? '我的收藏' : state.scope);
     const grid = $('deviceGrid'); grid.replaceChildren();
     const empty = $('emptyState');
     empty.hidden = devices.length > 0; grid.hidden = devices.length === 0;
