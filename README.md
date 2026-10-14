@@ -25,12 +25,14 @@
 2. 将**这个文件夹里的项目文件**（含 `.github/workflows/deploy.yml` 和 `assets/`）上传至仓库根目录的 `master` 分支。上传的是项目目录的**内容**，不能再多包一层 `router-hub/`。
 3. 打开仓库 **Settings → Pages → Build and deployment → Source → GitHub Actions**。
 4. `master` 分支每次推送时，Actions 将自动发布静态网站。第一次可以在 **Actions** 页查看 `Deploy Router Hub to GitHub Pages` 工作流。
-5. 默认网址为 `https://fejxc.github.io/router-hub/`。
-6. 使用这个网址打开网页，选择「添加设备」或「导入配置」。**请勿将私有设备 JSON 提交到公开仓库！**
+5. 当前正式访问地址为 `https://router.fejxc.top/`；GitHub Pages 默认地址 `https://fejxc.github.io/router-hub/` 仍可作为入口。
+6. 使用访问地址打开网页，选择「添加设备」或「导入配置」。**请勿将私有设备 JSON 提交到公开仓库！**
 
 官方说明：https://docs.github.com/en/get-started/start-your-journey/deploying-your-website-automatically
 
-### 使用 `router.fejxc.top`（可选）
+### 自定义域名：`router.fejxc.top`（已配置）
+
+当前已配置 DNS CNAME、GitHub Pages 自定义域和强制 HTTPS。需要重新配置时，按以下步骤操作：
 
 1. 在 GitHub **Settings → Pages → Custom domain** 中添加 `router.fejxc.top` 并保存。
 2. 然后在域名的 DNS 服务商添加 CNAME：`router` → `fejxc.github.io`（**不带** `/router-hub`）。
