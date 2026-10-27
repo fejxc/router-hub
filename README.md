@@ -40,6 +40,16 @@
 
 > 使用 GitHub Actions 发布时不需要在项目里创建 `CNAME` 文件；官方说明：https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
 
+### 同域名页面路由
+
+现有域名和首页保持不变，各页面通过路径区分：
+
+- 路由器管理：`https://router.fejxc.top/`
+- 资料分析思维导图：`https://router.fejxc.top/study/`
+- 资料分析图文知识库：`https://router.fejxc.top/study/资料分析_图文知识库.html`
+
+`study/` 目录由现有 GitHub Pages 工作流一并发布，不需要修改域名或 DNS 设置。
+
 ## 数据文件格式
 
 ```json
@@ -79,6 +89,9 @@ router-hub/
 ├── styles.css
 ├── app.js
 ├── assets/favicon.svg
+├── study/
+│   ├── index.html
+│   └── 资料分析_图文知识库.html
 ├── .nojekyll
 ├── .gitignore
 ├── .github/workflows/deploy.yml
